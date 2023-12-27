@@ -14,7 +14,7 @@ const Categories = () => {
   return (
     <Swiper
       slidesPerView={4}
-      spaceBetween={50}
+      spaceBetween={30}
       pagination={{
         clickable: true,
       }}
@@ -22,45 +22,36 @@ const Categories = () => {
       className="mySwiper mb-20"
     >
       <SwiperSlide>
-        <div className="relative">
-          <img src={slider1} alt="" />
-          <div className="absolute uppercase text-white top-3/4 translate-x-1/2 translate-y-1/2">
-            <h3 className="text-4xl">Salads</h3>
-          </div>
-        </div>
+        <img src={slider1} alt="" />
+        <h3 className="uppercase text-4xl text-white text-center -mt-16 mb-6 ">
+          Salads
+        </h3>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="relative">
-          <img src={slider2} alt="" />
-          <div className="absolute uppercase text-white top-3/4  translate-x-1/2 translate-y-1/2">
-            <h3 className="text-4xl">Pizzas</h3>
-          </div>
-        </div>
+        <img src={slider2} alt="" />
+        <h3 className="text-4xl text-white text-center -mt-16 mb-6 uppercase">
+          Pizzas
+        </h3>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="relative">
-          <img src={slider3} alt="" />
-          <div className="absolute uppercase text-white top-3/4  translate-x-1/2 translate-y-1/2">
-            <h3 className="text-4xl">Soups</h3>
-          </div>
-        </div>
+        <img src={slider3} alt="" />
+        <h3 className="text-4xl text-white text-center -mt-16 mb-6 uppercase">
+          Soups
+        </h3>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="relative">
-          <img src={slider4} alt="" />
-          <div className="absolute uppercase text-white top-3/4  translate-x-1/2 translate-y-1/2">
-            <h3 className="text-4xl">Deserts</h3>
-          </div>
-        </div>
+        <img src={slider4} alt="" />
+        <h3 className="text-4xl text-white text-center -mt-16 mb-6 uppercase">
+          Deserts
+        </h3>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="relative">
-          <img src={slider5} alt="" />
-          <div className="absolute uppercase text-white top-3/4  translate-x-1/2 translate-y-1/2">
-            <h3 className="text-4xl">Salads</h3>
-          </div>
-        </div>
+        <img src={slider5} alt="" />
+        <h3 className="text-4xl text-white text-center -mt-16 mb-6 uppercase">
+          Salads
+        </h3>
       </SwiperSlide>
+      <div className="mb-16"></div>
     </Swiper>
   );
 };
