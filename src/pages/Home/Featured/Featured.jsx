@@ -25,9 +25,9 @@ const Featured = () => {
               incidunt error eveniet. Id nemo ullam fugit, vitae odit
               voluptatibus assumenda ipsam ut earum molestiae?
             </p>
-            <div className="w-28 border-0 rounded-lg border-b-4 uppercase mt-8 text-center hover:cursor-pointer hover:pb-1">
+            <button className="btn btn-outline border-0 border-b-4 border-white text-white mt-4">
               Order Now
-            </div>
+            </button>
           </div>
         </div>
       </div>
