@@ -33,24 +33,20 @@ const Menu = () => {
       <MenuCategory items={offered}></MenuCategory>
       <MenuCategory
         items={dessert}
-        title="Deserts"
+        title="dessert"
         coverImg={desertImg}
       ></MenuCategory>
       <MenuCategory
         items={pizza}
-        title="Pizzas"
+        title="pizza"
         coverImg={pizzaImg}
       ></MenuCategory>
       <MenuCategory
         items={salad}
-        title="Salads"
+        title="salad"
         coverImg={saladImg}
       ></MenuCategory>
-      <MenuCategory
-        items={soup}
-        title="Soups"
-        coverImg={soupImg}
-      ></MenuCategory>
+      <MenuCategory items={soup} title="soup" coverImg={soupImg}></MenuCategory>
     </div>
   );
 };
