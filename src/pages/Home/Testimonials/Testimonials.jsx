@@ -15,7 +15,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("reviews.json")
+    fetch("http://localhost:8000/reviews")
       .then((response) => response.json())
       .then((data) => setReviews(data));
   }, []);
