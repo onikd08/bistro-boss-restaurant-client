@@ -72,7 +72,12 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user?.displayName && (
+          <div className="flex flex-row-reverse items-center gap-3">
+            <img className="w-10 rounded-full" src={user.photoURL} alt="" />
+            <p className="uppercase font-semibold">{user.displayName}</p>
+          </div>
+        )}
       </div>
     </div>
   );
