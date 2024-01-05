@@ -6,15 +6,19 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
   const { signIn } = useContext(AuthContext);
+
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -38,6 +42,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         showSuccess("Welcome!!!", "Login is successful");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         showError(err.message);
