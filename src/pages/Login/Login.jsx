@@ -6,6 +6,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -108,6 +109,14 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <div className="text-center mb-10">
+            <small className="text-amber-500">
+              New here?
+              <Link className="underline ml-1" to={"/signup"}>
+                Create a New Account
+              </Link>
+            </small>
+          </div>
         </div>
       </div>
     </div>
