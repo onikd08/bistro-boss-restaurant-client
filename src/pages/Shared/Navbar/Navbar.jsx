@@ -1,6 +1,21 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import showSuccess from "../../../utilities/showSuccess";
+import showError from "../../../utilities/showError";
 
 const Navbar = () => {
+  const { user, loading, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        showSuccess("Logout Successful", "See you soon!!!");
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
   const navOptions = (
     <>
       <li>
@@ -13,7 +28,11 @@ const Navbar = () => {
         <Link to={"/order/:salad"}>Order</Link>
       </li>
       <li>
-        <Link to={"/login"}>Login</Link>
+        {user && !loading ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          <Link to={"/login"}>Login</Link>
+        )}
       </li>
     </>
   );
