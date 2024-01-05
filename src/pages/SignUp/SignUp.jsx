@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import showSuccess from "../../utilities/showSuccess";
+import showError from "../../utilities/showError";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -18,9 +20,10 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        showSuccess("Congratulations!!!", "Sign up is successful");
       })
       .catch((err) => {
-        console.log(err.message);
+        showError(err.message);
       });
   };
   return (

@@ -8,11 +8,12 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import showSuccess from "../../utilities/showSuccess";
+import showError from "../../utilities/showError";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
-
   const { signIn } = useContext(AuthContext);
 
   useEffect(() => {
@@ -36,9 +37,10 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        showSuccess("Welcome!!!", "Login is successful");
       })
       .catch((err) => {
-        console.log(err);
+        showError(err.message);
       });
   };
   return (
@@ -97,12 +99,12 @@ const Login = () => {
                     ref={captchaRef}
                   />
 
-                  <button
+                  <div
                     onClick={handleValidateCaptcha}
                     className="btn btn-outline btn-info btn-sm mt-4 "
                   >
                     Validate
-                  </button>
+                  </div>
                 </div>
               </div>
               <div className="form-control mt-6">
