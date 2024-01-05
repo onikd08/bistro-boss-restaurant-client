@@ -28,6 +28,9 @@ const Navbar = () => {
         <Link to={"/order/:salad"}>Order</Link>
       </li>
       <li>
+        <Link to={"/private"}>Private</Link>
+      </li>
+      <li>
         {user && !loading ? (
           <button onClick={handleLogout}>Logout</button>
         ) : (
