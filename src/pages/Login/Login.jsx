@@ -1,6 +1,27 @@
+import { useEffect, useRef, useState } from "react";
 import loginImg from "../../assets/others/authentication1.png";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
+  const [disabled, setDisabled] = useState(true);
+  const captchaRef = useRef(null);
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleValidateCaptcha = () => {
+    if (validateCaptcha(captchaRef.current.value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -46,8 +67,35 @@ const Login = () => {
                 </a>
               </label>
             </div>
+            <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate></LoadCanvasTemplate>
+              </label>
+              <div className="flex justify-between">
+                <input
+                  type="text"
+                  maxLength={6}
+                  placeholder="Type Here"
+                  className="input input-bordered mt-2"
+                  required
+                  ref={captchaRef}
+                />
+
+                <button
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-info btn-sm mt-4 "
+                >
+                  Validate
+                </button>
+              </div>
+            </div>
             <div className="form-control mt-6">
-              <button className="btn bg-amber-500 text-white">Login</button>
+              <button
+                disabled={disabled}
+                className="btn bg-amber-500 text-white"
+              >
+                Login
+              </button>
             </div>
           </form>
         </div>
