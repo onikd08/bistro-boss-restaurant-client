@@ -40,8 +40,10 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        showSuccess("Welcome!!!", "Login is successful");
+        showSuccess(
+          `Welcome ${user.displayName.toUpperCase()}!!!`,
+          "Login is successful"
+        );
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -114,7 +116,8 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <button
-                  disabled={disabled}
+                  // uncomment it when project is finished
+                  //disabled={disabled}
                   className="btn bg-amber-500 text-white"
                 >
                   Login
