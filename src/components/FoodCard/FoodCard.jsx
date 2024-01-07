@@ -1,5 +1,53 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
+import showSuccess from "../../utilities/showSuccess";
+import showError from "../../utilities/showError";
+
 const FoodCard = ({ item }) => {
-  const { image, name, recipe, price } = item;
+  const { image, name, recipe, price, _id } = item;
+  const { user } = useAuth();
+  const axiosSecure = useAxios();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleAddToCart = () => {
+    if (!user) {
+      Swal.fire({
+        title: "Please Login",
+        text: "You need to login to place your order.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+      return;
+    }
+
+    const cartItem = {
+      menuItemId: _id,
+      email: user.email,
+      name,
+      image,
+      price,
+    };
+    axiosSecure
+      .post("/carts", cartItem)
+      .then((response) => {
+        if (response.data.insertedId) {
+          showSuccess("Well Done!", `${name} is added`);
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
 
   return (
     <div className="card  bg-base-100 shadow-xl">
@@ -13,7 +61,10 @@ const FoodCard = ({ item }) => {
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
         <div className="card-actions">
-          <button className="btn btn-outline border-0 border-b-4 border-yellow-500 text-yellow-500 mt-4">
+          <button
+            onClick={handleAddToCart}
+            className="btn btn-outline border-0 border-b-4 border-yellow-500 text-yellow-500 mt-4"
+          >
             Add to cart
           </button>
         </div>
