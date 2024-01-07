@@ -4,9 +4,11 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import showSuccess from "../../../utilities/showSuccess";
 import showError from "../../../utilities/showError";
 import { GiShoppingCart } from "react-icons/gi";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogout = () => {
     logOut()
@@ -36,7 +38,9 @@ const Navbar = () => {
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">
             <GiShoppingCart className="text-2xl -mt-2" />
-            <span className="badge badge-sm indicator-item -mt-2">8</span>
+            <span className="badge badge-sm indicator-item -mt-2">
+              {cart.length}
+            </span>
           </div>
         </div>
         <div
@@ -44,7 +48,7 @@ const Navbar = () => {
           className=" z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
         >
           <div className="card-body">
-            <span className="font-bold text-lg">8 Items</span>
+            <span className="font-bold text-lg">{cart.length} Items</span>
             <span className="text-info">Subtotal: $999</span>
             <div className="card-actions">
               <button className="btn btn-primary btn-block">View cart</button>

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useAxios from "../../hooks/useAxios";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
+import useCart from "../../hooks/useCart";
 
 const FoodCard = ({ item }) => {
   const { image, name, recipe, price, _id } = item;
@@ -11,6 +12,7 @@ const FoodCard = ({ item }) => {
   const axiosSecure = useAxios();
   const navigate = useNavigate();
   const location = useLocation();
+  const [, refetch] = useCart();
 
   const handleAddToCart = () => {
     if (!user) {
@@ -42,6 +44,7 @@ const FoodCard = ({ item }) => {
       .then((response) => {
         if (response.data.insertedId) {
           showSuccess("Well Done!", `${name} is added`);
+          refetch();
         }
       })
       .catch((err) => {
