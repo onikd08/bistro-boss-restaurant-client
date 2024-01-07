@@ -8,7 +8,7 @@ const MainLayout = () => {
     location.pathname.includes("login") || location.pathname.includes("signup");
 
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto">
       {isLocationLogin || <Navbar></Navbar>}
       <Outlet></Outlet>
       {isLocationLogin || <Footer></Footer>}
