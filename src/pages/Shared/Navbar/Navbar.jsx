@@ -89,18 +89,21 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Bistro Boss</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+        <a className="btn btn-ghost text-xl block uppercase">
+          Bistro Boss<span className="block font-normal">Restaurant</span>
+        </a>
       </div>
       <div className="navbar-end">
-        {user?.displayName && (
-          <div className="flex flex-row-reverse items-center gap-3">
-            <img className="w-10 rounded-full" src={user.photoURL} alt="" />
-            <p className="uppercase font-semibold">{user.displayName}</p>
-          </div>
-        )}
+        <div className="hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+        </div>
+        <div>
+          {user?.displayName && (
+            <div className="-mt-2">
+              <img className="w-8 rounded-full" src={user.photoURL} alt="" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
