@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import showSuccess from "../../../utilities/showSuccess";
 import showError from "../../../utilities/showError";
+import { GiShoppingCart } from "react-icons/gi";
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -30,6 +31,28 @@ const Navbar = () => {
       <li>
         <Link to={"/private"}>Private</Link>
       </li>
+
+      <div className="dropdown dropdown-end  rounded-full">
+        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div className="indicator">
+            <GiShoppingCart className="text-2xl -mt-2" />
+            <span className="badge badge-sm indicator-item -mt-2">8</span>
+          </div>
+        </div>
+        <div
+          tabIndex={0}
+          className=" z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
+        >
+          <div className="card-body">
+            <span className="font-bold text-lg">8 Items</span>
+            <span className="text-info">Subtotal: $999</span>
+            <div className="card-actions">
+              <button className="btn btn-primary btn-block">View cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <li>
         {user && !loading ? (
           <button onClick={handleLogout}>Logout</button>
