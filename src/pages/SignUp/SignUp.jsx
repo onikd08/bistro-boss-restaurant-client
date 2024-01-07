@@ -1,14 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import signUpImg from "../../assets/others/authentication1.png";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-  const { createUser, logOut, updateUser } = useContext(AuthContext);
+  const { createUser, logOut, updateUser } = useAuth();
   const {
     register,
     handleSubmit,

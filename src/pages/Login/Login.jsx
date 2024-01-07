@@ -1,22 +1,22 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import loginImg from "../../assets/others/authentication1.png";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   const captchaRef = useRef(null);
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
 
   const from = location.state?.from?.pathname || "/";
 
