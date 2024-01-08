@@ -6,6 +6,7 @@ import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, logOut, updateUser } = useAuth();
@@ -141,6 +142,8 @@ const SignUp = () => {
               <div className="form-control mt-6">
                 <button className="btn bg-amber-500 text-white">Sign Up</button>
               </div>
+              <div className="divider">OR</div>
+              <SocialLogin></SocialLogin>
             </form>
             <div className="text-center mb-10">
               <small className="text-amber-500">

@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet-async";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const location = useLocation();
@@ -123,6 +124,8 @@ const Login = () => {
                   Login
                 </button>
               </div>
+              <div className="divider">OR</div>
+              <SocialLogin></SocialLogin>
             </form>
             <div className="text-center mb-10">
               <small className="text-amber-500">
