@@ -46,7 +46,7 @@ const Cart = () => {
           subHeading={"My Cart"}
         ></SectionTitle>
       </div>
-      <div className="w-3/4 mx-auto  bg-white">
+      <div className="w-3/4 mx-auto  bg-white pb-10 mb-10">
         <div className="text-black flex justify-between m-12 font-semibold items-center pt-12">
           <h2 className="text-2xl uppercase">Total Orders: {cart.length}</h2>
           <h2 className="text-2xl uppercase">
