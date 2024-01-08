@@ -15,8 +15,8 @@ const Cart = () => {
           subHeading={"My Cart"}
         ></SectionTitle>
       </div>
-      <div className="w-3/4 mx-auto border bg-white">
-        <div className="text-black flex justify-between m-12 font-semibold items-center">
+      <div className="w-3/4 mx-auto  bg-white">
+        <div className="text-black flex justify-between m-12 font-semibold items-center pt-12">
           <h2 className="text-2xl uppercase">Total Orders: {cart.length}</h2>
           <h2 className="text-2xl uppercase">
             Total Price: $ {cart.reduce(calculateTotalPrice, 0)}
@@ -24,12 +24,12 @@ const Cart = () => {
           <button className="bg-[#D1A054] btn text-white border-0">PAY</button>
         </div>
 
-        <div className="overflow-x-auto mx-10">
+        <div className="overflow-x-auto mx-10 rounded-2xl">
           <table className="table">
             {/* head */}
             <thead className="bg-[#D1A054] text-white uppercase">
-              <tr>
-                <th></th>
+              <tr className="font-semibold text-lg">
+                <th>#</th>
                 <th>Item Image</th>
                 <th>Item Name</th>
                 <th>Price</th>
