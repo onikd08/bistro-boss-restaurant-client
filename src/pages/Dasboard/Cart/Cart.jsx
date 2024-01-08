@@ -1,11 +1,42 @@
+import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import CartRow from "./CartRow";
+import useAxios from "../../../hooks/useAxios";
+import showSuccess from "../../../utilities/showSuccess";
+import showError from "../../../utilities/showError";
 
 const Cart = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
+  const axiosSecure = useAxios();
   const calculateTotalPrice = (accumulator, currentValue) =>
     accumulator + currentValue.price;
+
+  const handleDeleteItem = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/carts/${id}`)
+          .then((response) => {
+            if (response.data.deletedCount === 1) {
+              showSuccess("Deleted!", "Item has been deleted");
+              refetch();
+            }
+          })
+          .catch((err) => {
+            showError(err.message);
+          });
+      }
+    });
+  };
 
   return (
     <section>
@@ -42,6 +73,7 @@ const Cart = () => {
                   key={item._id}
                   cartItem={item}
                   itemCount={idx + 1}
+                  deleteItem={handleDeleteItem}
                 ></CartRow>
               ))}
             </tbody>

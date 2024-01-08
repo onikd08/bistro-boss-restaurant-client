@@ -1,7 +1,7 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const CartRow = ({ cartItem, itemCount }) => {
-  const { price, image, name } = cartItem;
+const CartRow = ({ cartItem, itemCount, deleteItem }) => {
+  const { price, image, name, _id } = cartItem;
   return (
     <tr>
       <th>{itemCount}</th>
@@ -11,7 +11,10 @@ const CartRow = ({ cartItem, itemCount }) => {
       <td>{name}</td>
       <td>{price}</td>
       <th>
-        <button className="btn border-0 bg-red-700">
+        <button
+          onClick={() => deleteItem(_id)}
+          className="btn border-0 bg-red-700"
+        >
           <RiDeleteBinLine className="text-white text-2xl " />
         </button>
       </th>
