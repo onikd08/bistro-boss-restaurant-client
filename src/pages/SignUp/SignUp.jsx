@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import showSuccess from "../../utilities/showSuccess";
 import showError from "../../utilities/showError";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, logOut, updateUser } = useAuth();
@@ -15,6 +16,7 @@ const SignUp = () => {
   } = useForm();
 
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const onSubmit = (data) => {
     const { email, password, displayName, photoURL } = data;
@@ -24,15 +26,19 @@ const SignUp = () => {
         const userInfo = { displayName, photoURL };
         updateUser(userInfo)
           .then(() => {
-            logOut()
-              .then(() => {
+            const userData = { name: displayName, email };
+            axiosPublic.post("/users", userData).then((response) => {
+              if (response.data.insertedId) {
                 navigate("/login");
                 showSuccess(
                   "Congratulations!!!",
                   "Sign up is successful. Now you can login"
                 );
-              })
-              .catch((err) => showError(err.message));
+                logOut()
+                  .then(() => {})
+                  .catch((err) => showError(err.message));
+              }
+            });
           })
           .catch((err) => showError(err.message));
       })
