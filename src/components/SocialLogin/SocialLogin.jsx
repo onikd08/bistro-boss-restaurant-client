@@ -1,16 +1,35 @@
 import { FaGoogle } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
+import showSuccess from "../../utilities/showSuccess";
+import showError from "../../utilities/showError";
 
 const SocialLogin = () => {
   const { googleLogin } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        console.log(result.user);
+        const { displayName, email } = result.user;
+        axiosPublic
+          .post("/users", { name: displayName, email: email })
+          .then((response) => {
+            console.log(response.data);
+            navigate("/");
+            showSuccess(
+              `Welcome ${displayName.toUpperCase()}!!!`,
+              "Login is successful"
+            );
+          })
+          .catch((err) => {
+            showError(err.message);
+          });
       })
       .catch((err) => {
-        console.log(err);
+        showError(err.message);
       });
   };
   return (
