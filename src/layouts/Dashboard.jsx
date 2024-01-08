@@ -1,32 +1,85 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { FaHome, FaWallet, FaShoppingBag, FaEnvelope } from "react-icons/fa";
+import { SlCalender } from "react-icons/sl";
+import { MdRateReview } from "react-icons/md";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { IoMenu } from "react-icons/io5";
 
 const Dashboard = () => {
   return (
     <div className="flex">
-      <div className="w-1/3 bg-[#D1A054] min-h-screen text-white">
-        <ul className="menu">
+      <div className="w-1/5 bg-[#D1A054] min-h-screen text-black uppercase">
+        <div className="uppercase text-center text-3xl my-10">
+          <h3 className="font-bold">Bistro Boss</h3>
+          <h3 className="tracking-wide">Restaurant</h3>
+        </div>
+        <ul className="menu tracking-wide">
           <li>
-            <NavLink to={"/dashboard/userHome"}>User Home</NavLink>
+            <NavLink to={"/dashboard/userHome"}>
+              <FaHome className="text-2xl" />
+              User Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/reservation"}>Reservation</NavLink>
+            <NavLink to={"/dashboard/reservation"}>
+              <SlCalender className="text-2xl" />
+              Reservation
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/paymentHistory"}>Payment History</NavLink>
+            <NavLink to={"/dashboard/paymentHistory"}>
+              <FaWallet className="text-2xl" />
+              Payment History
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/review"}>Add Review</NavLink>
+            <NavLink to={"/dashboard/review"}>
+              <MdRateReview className=" text-2xl" />
+              Add Review
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/myBooking"}>My Booking</NavLink>
+            <NavLink to={"/dashboard/myBooking"}>
+              <BsCalendar2DateFill className=" text-2xl" />
+              My Booking
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/cart"}>My Cart</NavLink>
+            <NavLink to={"/dashboard/cart"}>
+              <FaHome className="text-2xl" />
+              My Cart
+            </NavLink>
+          </li>
+          <hr className="my-10 w-4/5 mx-auto" />
+
+          <li>
+            <NavLink to={"/"}>
+              <FaHome className="text-2xl" />
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/menu"}>
+              <IoMenu className="text-2xl" />
+              Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/order/salad"}>
+              <FaShoppingBag className=" text-2xl" />
+              Shop
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/"}>
+              <FaEnvelope className=" text-2xl" />
+              Contact
+            </NavLink>
           </li>
         </ul>
       </div>
 
-      <div className="w-2/3 bg-slate-200 min-h-screen">
+      <div className="w-4/5 bg-slate-200 min-h-screen">
         <Outlet></Outlet>
       </div>
     </div>
