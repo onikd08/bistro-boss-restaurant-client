@@ -4,8 +4,8 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:8000",
 });
 
-const useAxios = () => {
+const useAxiosSecure = () => {
   return axiosInstance;
 };
 
-export default useAxios;
+export default useAxiosSecure;

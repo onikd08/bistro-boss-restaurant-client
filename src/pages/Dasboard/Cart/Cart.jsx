@@ -2,13 +2,13 @@ import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import CartRow from "./CartRow";
-import useAxios from "../../../hooks/useAxios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import showSuccess from "../../../utilities/showSuccess";
 import showError from "../../../utilities/showError";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
-  const axiosSecure = useAxios();
+  const axiosSecure = useAxiosSecure();
   const calculateTotalPrice = (accumulator, currentValue) =>
     accumulator + currentValue.price;
 
