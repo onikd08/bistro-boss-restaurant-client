@@ -1,11 +1,26 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaHome, FaWallet, FaShoppingBag, FaEnvelope } from "react-icons/fa";
+import {
+  FaHome,
+  FaWallet,
+  FaShoppingBag,
+  FaEnvelope,
+  FaUtensils,
+  FaList,
+  FaBook,
+  FaUsers,
+} from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { MdRateReview } from "react-icons/md";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { IoMenu } from "react-icons/io5";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+  const [cart] = useCart();
+
+  //TODO: get isAdmin value from the database
+  const isAdmin = true;
+
   return (
     <div className="flex">
       <div className="w-1/5 bg-[#D1A054] min-h-screen text-black uppercase">
@@ -14,44 +29,81 @@ const Dashboard = () => {
           <h3 className="tracking-wide">Restaurant</h3>
         </div>
         <ul className="menu tracking-wide">
-          <li>
-            <NavLink to={"/dashboard/userHome"}>
-              <FaHome className="text-2xl" />
-              User Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/dashboard/reservation"}>
-              <SlCalender className="text-2xl" />
-              Reservation
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/dashboard/paymentHistory"}>
-              <FaWallet className="text-2xl" />
-              Payment History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/dashboard/review"}>
-              <MdRateReview className=" text-2xl" />
-              Add Review
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/dashboard/myBooking"}>
-              <BsCalendar2DateFill className=" text-2xl" />
-              My Booking
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/dashboard/cart"}>
-              <FaHome className="text-2xl" />
-              My Cart
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+              <li>
+                <NavLink to={"/dashboard/adminHome"}>
+                  <FaHome className="text-2xl" />
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/addItems"}>
+                  <FaUtensils className="text-2xl" />
+                  Add Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/manageItems"}>
+                  <FaList className="text-2xl" />
+                  Manage Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/bookings"}>
+                  <FaBook className="text-2xl" />
+                  Manage Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/users"}>
+                  <FaUsers className="text-2xl" />
+                  All Users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to={"/dashboard/userHome"}>
+                  <FaHome className="text-2xl" />
+                  User Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/reservation"}>
+                  <SlCalender className="text-2xl" />
+                  Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/paymentHistory"}>
+                  <FaWallet className="text-2xl" />
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/review"}>
+                  <MdRateReview className=" text-2xl" />
+                  Add Review
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/myBooking"}>
+                  <BsCalendar2DateFill className=" text-2xl" />
+                  My Booking
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dashboard/cart"}>
+                  <FaHome className="text-2xl" />
+                  My Cart ({cart.length})
+                </NavLink>
+              </li>
+            </>
+          )}
           <hr className="my-10 w-4/5 mx-auto" />
-
+          {/* Shared navLinks */}
           <li>
             <NavLink to={"/"}>
               <FaHome className="text-2xl" />
