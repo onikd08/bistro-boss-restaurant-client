@@ -14,12 +14,13 @@ import { MdRateReview } from "react-icons/md";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { IoMenu } from "react-icons/io5";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
   //TODO: get isAdmin value from the database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex">
