@@ -9,20 +9,34 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../firebase/firebase.init";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const axiosPublic = useAxiosPublic();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        axiosPublic
+          .post("/jwt", {
+            email: currentUser.email,
+          })
+          .then((res) => {
+            if (res.data?.token) {
+              localStorage.setItem("access-token", res.data.token);
+            }
+          });
+      } else {
+        localStorage.removeItem("access-token");
+      }
       setUser(currentUser);
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const createUser = (email, password) => {
     setLoading(true);
