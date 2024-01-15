@@ -8,8 +8,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import TestPrivate from "../pages/TestPrivate/TestPrivate";
 import Dashboard from "../layouts/Dashboard";
-import Cart from "../pages/Dasboard/Cart/Cart";
-import AllUsers from "../pages/Dasboard/AllUsers/AllUsers";
+import Cart from "../pages/Dashboard/Cart/Cart";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
