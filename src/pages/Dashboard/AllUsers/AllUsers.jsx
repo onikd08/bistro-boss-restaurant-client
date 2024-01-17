@@ -60,13 +60,13 @@ const AllUsers = () => {
       <section>
         <div className="text-black">
           <SectionTitle
-            heading={"How many??"}
-            subHeading={"Manage All Users"}
+            heading={"Manage All Users"}
+            subHeading={"How Many"}
           ></SectionTitle>
         </div>
         <div className="w-3/4 mx-auto  bg-white pb-10 mb-10">
           <div className="text-black flex justify-between m-12 font-semibold items-center pt-12">
-            <h2 className="text-2xl uppercase">Total Users: {users.length}</h2>
+            <h2 className="text-2xl uppercase">Total Items: {users.length}</h2>
           </div>
 
           <div className="overflow-x-auto mx-10 rounded-2xl">
