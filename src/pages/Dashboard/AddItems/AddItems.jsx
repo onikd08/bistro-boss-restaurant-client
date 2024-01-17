@@ -1,10 +1,45 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import showSuccess from "../../../utilities/showSuccess";
+import showError from "../../../utilities/showError";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_UPLOAD_API_KEY;
+const image_hosting_URL = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItems = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+
+  const onSubmit = async (data) => {
+    // image upload to imgbb and then get an url
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_URL, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const menuItem = {
+        name: data.name,
+        category: data.category,
+        price: parseFloat(data.price),
+        recipe: data.recipe,
+        image: res.data.data.display_url,
+      };
+      const menuResponse = await axiosSecure.post("/menu", menuItem);
+      console.log(menuResponse.data);
+      if (menuResponse.data.insertedId) {
+        showSuccess("Well done!", "Menu Item has been added successfully");
+      } else {
+        showError("Something went wrong, Please try again");
+      }
+    }
+  };
+
   return (
     <div className="text-black">
       <SectionTitle
@@ -75,6 +110,7 @@ const AddItems = () => {
 
             <div>
               <input
+                required
                 {...register("image")}
                 className="mt-5 text-gray-700 bg-white dark:bg-gray-800 dark:text-gray-300"
                 type="file"
